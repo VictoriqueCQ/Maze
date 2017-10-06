@@ -10,12 +10,12 @@ public class MainPanel extends JPanel implements KeyListener {
 
 
     MainPanel() {
-        setBounds(15, 50, 600, 600);
+        setBounds(0, 0, 600, 600);
         setBackground(Color.white);
         addKeyListener(this);
         myImage = new Image[10];
         for (int i = 0; i < 10; i++) {
-            myImage[i] = Toolkit.getDefaultToolkit().getImage("pic\\" + i + ".gif");
+            myImage[i] = Toolkit.getDefaultToolkit().getImage("pic\\" + i + ".png");
         }
         setVisible(true);
     }

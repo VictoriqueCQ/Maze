@@ -5,7 +5,7 @@ public class Maze extends JFrame{
     Maze(){
         super("迷宫程序");
         MainPanel panel;
-        setSize(720, 720);
+        setSize(600, 630);
         setVisible(true);
         setResizable(false);
         setLocation(300, 20);

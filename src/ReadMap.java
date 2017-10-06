@@ -3,19 +3,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadMap {
+class ReadMap {
     private int mx, my;
     private int[][] myMap = new int[20][20];
     private BufferedReader br;
 
     ReadMap() {
-        int level_map = 2;
+        int mapNum = 1;
         FileReader r;
         StringBuilder sb = new StringBuilder("");
         int c = 0;//地图上第几个数字
         String s;
         try {
-            File f = new File("maps\\" + level_map + ".map");
+            File f = new File("maps\\" + mapNum + ".map");
             r = new FileReader(f);
             br = new BufferedReader(r);
         } catch (IOException e) {

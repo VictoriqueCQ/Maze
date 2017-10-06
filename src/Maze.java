@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Maze extends JFrame{
-    Maze(){
+    private Maze(){
         super("迷宫程序");
         MainPanel panel;
         setSize(600, 630);

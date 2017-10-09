@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class MainPanel extends JPanel implements KeyListener {
-    private int[][] map, mapTmp;
+    private int[][] map;
     private int manX, manY;
     private Image[] myImage;
 
@@ -22,13 +22,10 @@ public class MainPanel extends JPanel implements KeyListener {
 
     void RunMaze() {
         ReadMap LevelMap;
-        ReadMap LevelMapTmp;
         LevelMap = new ReadMap();
-        LevelMapTmp = new ReadMap();
         map = LevelMap.getMap();
         manX = LevelMap.getManX();
         manY = LevelMap.getManY();
-        mapTmp = LevelMapTmp.getMap();
         repaint();
     }
 
@@ -62,7 +59,7 @@ public class MainPanel extends JPanel implements KeyListener {
     }
 
     private void moveUp() {
-        if (map[manY - 1][manX] == 1 || manY == 0) {
+        if (manY == 0 || map[manY - 1][manX] == 1) {
             map[manY][manX] = 8;
             repaint();
         } else if (map[manY - 1][manX] == 2) {
@@ -72,47 +69,43 @@ public class MainPanel extends JPanel implements KeyListener {
             repaint();
             manY--;
         }
-
-
     }
 
     private void moveDown() {
-        if (map[manY + 1][manX] == 2) {
+        if (manY == 19 || map[manY + 1][manX] == 1) {
+            map[manY][manX] = 5;
+            repaint();
+        } else if (map[manY + 1][manX] == 2) {
             map[manY][manX] = 2;
             map[manY + 1][manX] = 5;
             repaint();
             manY++;
         }
-        if (map[manY + 1][manX] == 1 || manY == 19) {
-            map[manY][manX] = 5;
-            repaint();
-        }
+
     }
 
     private void moveLeft() {
-        if (map[manY][manX - 1] == 2) {
+        if (manX == 0 || map[manY][manX - 1] == 1) {
+            map[manY][manX] = 6;
+            repaint();
+        } else if (map[manY][manX - 1] == 2) {
             map[manY][manX] = 2;
             map[manY][manX - 1] = 6;
             repaint();
             manX--;
         }
-        if (map[manY][manX - 1] == 1 || manX == 0) {
-            map[manY][manX] = 6;
-            repaint();
-        }
     }
 
     private void moveRight() {
-        if (map[manY][manX + 1] == 2) {
+        if (manX == 19 || map[manY][manX + 1] == 1) {
+            map[manY][manX] = 7;
+            repaint();
+        } else if (map[manY][manX + 1] == 2) {
 
             map[manY][manX] = 2;
             map[manY][manX + 1] = 7;
             repaint();
             manX++;
-        }
-        if (map[manY][manX + 1] == 1 || manX == 19) {
-            map[manY][manX] = 7;
-            repaint();
         }
     }
 }

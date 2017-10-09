@@ -62,165 +62,55 @@ public class MainPanel extends JPanel implements KeyListener {
     }
 
     private void moveUp() {
-        if (map[manY - 1][manX] == 2 || map[manY - 1][manX] == 4) {
-            if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                map[manY][manX] = 4;
-            } else {
-                map[manY][manX] = 2;
-            }
+        if (map[manY - 1][manX] == 1 || manY == 0) {
+            map[manY][manX] = 8;
+            repaint();
+        } else if (map[manY - 1][manX] == 2) {
+            map[manY][manX] = 2;
+
             map[manY - 1][manX] = 8;
             repaint();
             manY--;
-        } else if (map[manY - 1][manX] == 3 || map[manY - 1][manX] == 9) {
-            if (map[manY - 2][manX] == 4) {
-                if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY - 1][manX] = 8;
-                map[manY - 2][manX] = 9;
-                repaint();
-                manY--;
-            } else if (map[manY - 2][manX] == 2) {
-                if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY - 1][manX] = 8;
-                map[manY - 2][manX] = 3;
-                repaint();
-                manY--;
-            } else {
-                map[manY][manX] = 8;
-                repaint();
-            }
         }
-        if (map[manY - 1][manX] == 1) {
-            map[manY][manX] = 8;
-            repaint();
-        }
+
+
     }
 
     private void moveDown() {
-        if (map[manY + 1][manX] == 2 || map[manY + 1][manX] == 4) {
-            if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                map[manY][manX] = 4;
-            } else {
-                map[manY][manX] = 2;
-            }
+        if (map[manY + 1][manX] == 2) {
+            map[manY][manX] = 2;
             map[manY + 1][manX] = 5;
             repaint();
             manY++;
-        } else if (map[manY + 1][manX] == 3 || map[manY + 1][manX] == 9) {
-            if (map[manY + 2][manX] == 4) {
-                if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY + 1][manX] = 5;
-                map[manY + 2][manX] = 9;
-                repaint();
-                manY++;
-            } else if (map[manY + 2][manX] == 2) {
-                if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY + 1][manX] = 5;
-                map[manY + 2][manX] = 3;
-                repaint();
-                manY++;
-            } else {
-                map[manY][manX] = 5;
-                repaint();
-            }
-        } else if (map[manY + 1][manX] == 1) {
+        }
+        if (map[manY + 1][manX] == 1 || manY == 19) {
             map[manY][manX] = 5;
             repaint();
         }
     }
 
     private void moveLeft() {
-        if (map[manY][manX - 1] == 2 || map[manY][manX - 1] == 4) {
-            if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9)
-                map[manY][manX] = 4;
-            else map[manY][manX] = 2;
+        if (map[manY][manX - 1] == 2) {
+            map[manY][manX] = 2;
             map[manY][manX - 1] = 6;
             repaint();
             manX--;
-        } else if (map[manY][manX - 1] == 3 || map[manY][manX - 1] == 9) {
-            if (map[manY][manX - 2] == 4) {
-                if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY][manX - 1] = 6;
-                map[manY][manX - 2] = 9;
-                repaint();
-                manX--;
-
-            } else if (map[manY][manX - 2] == 2) {
-                if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY][manX - 1] = 6;
-                map[manY][manX - 2] = 3;
-                repaint();
-                manX--;
-
-            } else {
-                map[manY][manX] = 6;
-                repaint();
-            }
-        } else if (map[manY][manX - 1] == 1) {
+        }
+        if (map[manY][manX - 1] == 1 || manX == 0) {
             map[manY][manX] = 6;
             repaint();
         }
     }
 
     private void moveRight() {
-        if (map[manY][manX + 1] == 2 || map[manY][manX + 1] == 4) {
-            if (mapTmp[manY][manX] == 4 || mapTmp[manY][manX] == 9)
-                map[manY][manX] = 4;
-            else map[manY][manX] = 2;
+        if (map[manY][manX + 1] == 2) {
+
+            map[manY][manX] = 2;
             map[manY][manX + 1] = 7;
             repaint();
             manX++;
-        } else if (map[manY][manX + 1] == 3 || map[manY][manX + 1] == 9) {
-            if (map[manY][manX + 2] == 4) {
-                if (mapTmp[manY][manX] == 4) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY][manX + 1] = 7;
-                map[manY][manX + 2] = 9;
-                repaint();
-                manX++;
-
-            } else if (map[manY][manX + 2] == 2) {
-                if (mapTmp[manY][manX] == 4) {
-                    map[manY][manX] = 4;
-                } else {
-                    map[manY][manX] = 2;
-                }
-                map[manY][manX + 1] = 7;
-                map[manY][manX + 2] = 3;
-                repaint();
-                manX++;
-
-            } else {
-                map[manY][manX] = 7;
-                repaint();
-            }
-        } else if (map[manY][manX + 1] == 1) {
+        }
+        if (map[manY][manX + 1] == 1 || manX == 19) {
             map[manY][manX] = 7;
             repaint();
         }

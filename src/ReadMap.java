@@ -15,7 +15,7 @@ class ReadMap {
         int c = 0;//地图上第几个数字
         String s;
         try {
-            File f = new File("maps\\" + mapNum + ".map");
+            File f = new File("maps\\" + mapNum + ".txt");
             r = new FileReader(f);
             br = new BufferedReader(r);
         } catch (IOException e) {

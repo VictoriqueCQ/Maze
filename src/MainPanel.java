@@ -64,7 +64,6 @@ public class MainPanel extends JPanel implements KeyListener {
             repaint();
         } else if (map[manY - 1][manX] == 2) {
             map[manY][manX] = 2;
-
             map[manY - 1][manX] = 8;
             repaint();
             manY--;

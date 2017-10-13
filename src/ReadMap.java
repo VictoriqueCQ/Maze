@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+//读取地图数据
 class ReadMap {
     private int mx, my;
     private int[][] myMap = new int[20][20];

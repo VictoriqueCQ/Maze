@@ -9,7 +9,7 @@ class ReadMap {
     private BufferedReader br;
 
     ReadMap() {
-        int mapNum = 3;
+        int mapNum = 4;
         FileReader r;
         StringBuilder sb = new StringBuilder("");
         int c = 0;//地图上第几个数字

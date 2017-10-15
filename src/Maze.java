@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Maze extends JFrame{
     private Maze(){
@@ -21,6 +22,13 @@ public class Maze extends JFrame{
         validate();
     }
     public static void main(String[] args) {
+        int[] xArray = {1,2,2,2,3};
+        int[] yArray = {1,1,2,3,3};
+        try {
+            new BuildMap(5,5,xArray,yArray);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         new Maze();
     }
 }

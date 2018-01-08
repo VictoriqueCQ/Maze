@@ -2,26 +2,62 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-//生成地图，暂时没想好怎么写比较好
-class BuildMap {
-    BuildMap(int xLength, int yLength, List<Integer> xWallPoint, List<Integer> yWallPoint) throws IOException {
+public class BuildMap {
+//    private int xLength;
+//    private int yLength;
+
+    BuildMap(int xLength, int yLength, List arrayList) throws IOException {
+//        this.xLength = xLength;
+//        this.yLength = yLength;
         int[][] map = new int[xLength][yLength];
         for (int i = 0; i < xLength; i++) {
             for (int j = 0; j < yLength; j++) {
-                map[i][j] = 1;
+                map[i][j] = 2;
             }
+        }
+        System.out.println(arrayList.size());
+        for(int i = 0;i<arrayList.size();i++){
+            int[][] newArray = (int[][])arrayList.get(i);
+            System.out.println("{{"+newArray[0][0]+","+newArray[0][1]+"},{"+newArray[1][0]+","+newArray[1][1]+"}}");
+            if(newArray[0][1]==newArray[1][1]){//如果y相同，此线段垂直
+                if(newArray[0][0]>=newArray[1][0]){
+                    for(int j = newArray[1][0]+1;j<=newArray[0][0]+1;j++){
+                        map[j][newArray[0][1]+1] = 1;
+                    }
+                }else if(newArray[0][0]<newArray[1][0]){
+                    for(int j = newArray[0][0]+1;j<=newArray[1][0]+1;j++){
+                        map[j][newArray[0][1]+1] = 1;
+                    }
+                }
+            }else{//线段水平
+                if(newArray[0][1]>=newArray[1][1]){
+                    for(int j = newArray[1][1]+1;j<=newArray[0][1]+1;j++){
+                        map[newArray[0][0]+1][j] = 1;
+                    }
+                }else if(newArray[0][1]<newArray[1][1]){
+                    for(int j = newArray[0][1]+1;j<=newArray[1][1]+1;j++){
+                        map[newArray[0][0]+1][j] = 1;
+                    }
+                }
+            }
+        }
+        for(int i = 0;i<xLength;i++){
+            map[0][i] = 1;
+            map[yLength-1][i] = 1;
+            map[i][0] = 1;
+            map[i][xLength-1] = 1;
         }
         //默认两个list的size相同
-        for (int i = 0; i < xWallPoint.size(); i++) {
-            map[xWallPoint.get(i)][yWallPoint.get(i)] = 2;
-        }
+//        for (int i = 0; i < xWallPoint.size(); i++) {
+//            map[xWallPoint.get(i)][yWallPoint.get(i)] = 2;
+//        }
         map[0][1] = 5;
-        for (int i = 0; i < xLength; i++) {
-            for (int j = 0; j < yLength; j++) {
-                System.out.print(map[i][j]);
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < xLength; i++) {
+//            for (int j = 0; j < yLength; j++) {
+//                System.out.print(map[i][j]);
+//            }
+//            System.out.println();
+//        }
         int mapNum = 4;
         String s = "";
         String fileAddress = "maps\\" + mapNum + ".txt";
@@ -50,44 +86,4 @@ class BuildMap {
         }
         fw.close();
     }
-//    public static void main(String[] args){
-//        List<Integer> xList = new ArrayList<>();
-//        List<Integer> yList = new ArrayList<>();
-//        int[][] array = {
-//                {1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-//                {1, 2, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1},
-//                {1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 2, 2, 1, 2, 1, 1, 2, 1, 1},
-//                {1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1},
-//                {1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1},
-//                {1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1},
-//                {1, 2, 2, 1, 1, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1},
-//                {1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1},
-//                {1, 2, 2, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1},
-//                {1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1},
-//                {1, 2, 2, 1, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1},
-//                {1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1},
-//                {1, 2, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1, 1},
-//                {1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1},
-//                {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1},
-//                {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1},
-//                {1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1},
-//                {1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 1, 2, 2, 1, 1},
-//                {1, 2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 1},
-//                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-//
-//        };
-//        for(int i = 0;i<20;i++){
-//            for(int j = 0;j<20;j++){
-//                if(array[i][j] == 2){
-//                    xList.add(i);
-//                    yList.add(j);
-//                }
-//            }
-//        }
-//        try {
-//            new BuildMap(20,20,xList,yList);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

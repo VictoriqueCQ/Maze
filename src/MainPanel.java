@@ -4,13 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class MainPanel extends JPanel implements KeyListener {
+    private int xLength,yLength;
     private int[][] map;
     private int manX, manY;
     private Image[] myImage;
 
 
-    MainPanel() {
-        setBounds(0, 0, 600, 600);
+    MainPanel(int xLength, int yLength) {
+        this.xLength = xLength;
+        this.yLength = yLength;
+        setBounds(0, 0, 360, 360);
         setBackground(Color.white);
         addKeyListener(this);
         myImage = new Image[10];
@@ -22,7 +25,7 @@ public class MainPanel extends JPanel implements KeyListener {
 
     void RunMaze() {
         ReadMap LevelMap;
-        LevelMap = new ReadMap();
+        LevelMap = new ReadMap(xLength,yLength);
         map = LevelMap.getMap();
         manX = LevelMap.getManX();
         manY = LevelMap.getManY();
@@ -30,9 +33,9 @@ public class MainPanel extends JPanel implements KeyListener {
     }
 
     public void paint(Graphics g) {
-        int len = 30;
-        for (int i = 0; i < 20; i++)
-            for (int j = 0; j < 20; j++) {
+        int len = 30;//图片长宽
+        for (int i = 0; i < xLength; i++)
+            for (int j = 0; j < yLength; j++) {
                 g.drawImage(myImage[map[j][i]], i * len, j * len, this);
             }
     }
@@ -71,7 +74,7 @@ public class MainPanel extends JPanel implements KeyListener {
     }
 
     private void moveDown() {
-        if (manY == 19 || map[manY + 1][manX] == 1) {
+        if (manY == xLength-1 || map[manY + 1][manX] == 1) {
             map[manY][manX] = 5;
             repaint();
         } else if (map[manY + 1][manX] == 2) {
@@ -96,7 +99,7 @@ public class MainPanel extends JPanel implements KeyListener {
     }
 
     private void moveRight() {
-        if (manX == 19 || map[manY][manX + 1] == 1) {
+        if (manX == xLength-1 || map[manY][manX + 1] == 1) {
             map[manY][manX] = 7;
             repaint();
         } else if (map[manY][manX + 1] == 2) {

@@ -13,7 +13,7 @@ public class MainPanel extends JPanel implements KeyListener {
     MainPanel(int xLength, int yLength) {
         this.xLength = xLength;
         this.yLength = yLength;
-        setBounds(0, 0, 360, 360);
+        setBounds(0, 0, xLength*30, yLength*30);
         setBackground(Color.white);
         addKeyListener(this);
         myImage = new Image[10];
